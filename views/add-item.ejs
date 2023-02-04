@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+    <div id="main">
+        <form action="" method="post" autocomplete="off">
+            <div class="report">
+                <div class="form-header">
+                    <h1>Add Item</h1>
+                    <img src="/images/DPF_Logo.png" alt="">
+                </div>
+                <div class="item-form">
+                    <div class="form-floating">
+                        <input class="form-control" type="text" name="itemId" value="<%= %>" required>
+                        <label class="form-label" for="itemId">Item ID:</label>
+                    </div>
+                    <div class="form-floating">
+                        <input class="form-control" type="text" name="itemDescription" value="<%= %>" required>
+                        <label class="form-label" for="itemDescription">Item Description:</label>
+                    </div>
+                    <div class="">
+                        <label class="form-label" for="vendor">Vendor:</label>
+                        <select name="vendor" size="5" class="form-select" multiple aria-label="multiple select example">
+                            <% vendors.forEach((vendor) =>  { %>
+                            <option value="<%= vendor.company %>"><%= vendor.company %></option>
+                            <% }) %>
+                          </select>
+                    </div>
+                </div>
+                <div class="form-submit">
+                    <button class="action-button">Submit</button>
+                    <a class="action-button cancel-button" href="/items">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+<%- include('partials/footer') %>

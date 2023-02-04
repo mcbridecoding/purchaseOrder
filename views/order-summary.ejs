@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+    <div id="main">
+        <div class="report">
+            <div class="form-header">
+                <h1>Summary</h1>
+                <img src="/images/DPF_Logo.png" alt="">
+            </div>
+            <table class="table table-striped table-hover table-bordered table-sm">
+                <thead class="table-header">
+                    <th scope="col">Sku</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Order Qty</th>
+                    <th scope="col"></th>
+                </thead>
+                <tbody>
+                    <% orders.forEach((order) => { %>
+                    <tr class="align-right"> 
+                        <td class="align-left"><%= order._id.sku %></td>
+                        <td class="align-left"><%= order._id.skuDescription %></td>
+                        <td class="column-sm"><%= order.orderQuantity %></td>
+                        <td class="table-delete">
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/show-orders-<%= order._id.sku %>">Show Orders</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<%- include('partials/footer') %>

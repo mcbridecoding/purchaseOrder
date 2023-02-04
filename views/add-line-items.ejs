@@ -1,0 +1,96 @@
+<%- include('partials/header') %>
+    <div id="main">
+        <% purchaseOrders.forEach((purchaseOrder) => { %>
+        <div class="report">
+            <form action="" method="post" autocomplete="off">
+            <div class="">
+                <div class="purchase-order-card-header">
+                    <h4>PO#: <%= purchaseOrder.poNumber %></h4>
+                    <h4>Date: <%= purchaseOrder.date %></h4>
+                    <h4>Vendor: <%= purchaseOrder.vendor %></h4>
+                </div>
+                <div class="purchase-order-card-body">
+                    <div class="card-row">
+                        <h5><i>Ship To:</i> <%= purchaseOrder.company %></h5>
+                        <h5><i>Attention To:</i> <%= purchaseOrder.attention %></h5>
+                        <h5><i>Address 1: </i><%= purchaseOrder.addressOne %></h5>
+                        <h5><i>Address 2: </i><%= purchaseOrder.addressTwo %></h5>
+                        <h5><i>City: </i><%= purchaseOrder.city %></h5>
+                    </div>
+                    <div class="card-row">
+                        <h5><i>State / Province: </i><%= purchaseOrder.state %></h5>
+                        <h5><i>Zip / Postal Code: </i><%= purchaseOrder.postal %></h5>
+                        <h5><i>Country: </i><%= purchaseOrder.country %></h5>
+                        <h5><i>Email: </i><%= purchaseOrder.email %></h5>
+                        <h5><i>Phone: </i><%= purchaseOrder.phone %></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="line-items">
+                <div class="item-entry">
+                    <div class="row form-floating">
+                        <input class="form-control" type="text" name="lineItem" value="" required>
+                        <label class="form-label" for="lineItem">Sku:</label> 
+                    </div>
+                    <div class="row form-floating">
+                        <input class="form-control" type="text" name="description" value="" required>
+                        <label class="form-label" for="description">Description:</label>
+                    </div>
+                    <div class="row form-floating">
+                        <input class="form-control" type="text" name="orderQty" required>
+                        <label class="form-label" for="orderQty">Qty:</label>
+                    </div>
+                    <div class="row form-floating">
+                        <input class="form-control" type="text" name="unitValue" required>
+                        <label class="form-label" for="unitValue">Unit Value:</label>
+                    </div>
+                    <div class="action-bar">
+                        <a class="action-button black-button" target="_blank" href="/items">Item List</a>
+                        <button name="poNumber" value="<%= purchaseOrder._id %>" class="action-button">Add Item</button>
+                    </div>
+                </div>
+                <div class="line-items-table">
+                    <table class="table table-striped table-sm">
+                        <thead class="no-wrap table-header">
+                            <th scope="col" class="column-sm align-left">SKU:</th>
+                            <th scope="col" class="align-left">Description:</th>
+                            <th scope="col" class="align-right column-sm">Qty:</th>
+                            <th scope="col" class="align-right column-sm">Value:</th>
+                            <th scope="col" class="align-right column-sm">Line Total:</th>
+                            <th scope="col" class="align-right"></th>
+                        </thead>
+                        <tbody>
+                            <% foundItems.forEach((item) => { %>
+                            <tr>
+                                <td class="no-wrap"><%= item.itemId %></td>
+                                <td class="no-wrap"><%= item.itemDescription %></td>
+                                <td class="align-right"><%= item.orderQuantity %></td>
+                                <td class="align-right"><%= item.unitValue %></td>
+                                <td class="align-right"><%= item.lineTotal %></td>
+                                <td class="table-delete">
+                                    <a name="customerId" value="" type="submit" class="btn-close" aria-label="Close" href="/delete-line-item-<%= item._id %>-<%= purchaseOrder._id %>"></a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <div class="puchase-order-totals">
+                        <div class="align-right">
+                            <h5>Sub Total: $<%= subTotal.toFixed(2) %> <%= purchaseOrder.currency %></h5>
+                            <h5>Tax (5%): $<%= (subTotal * 0.05).toFixed(2) %> <%= purchaseOrder.currency %></h5>
+                            <h5>Total: $<%= (subTotal * 1.05).toFixed(2) %> <%= purchaseOrder.currency %></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="option-panel">
+                <a class="action-button black-button" href="/print-id=<%= purchaseOrder._id %>">Print</a>
+                <a class="action-button" href="/purchasing">Save / Exit</a>
+                <a class="action-button cancel-button" href="/purchasing">Cancel</a>
+            </div>
+            </form>
+        </div>
+        <% }) %> 
+    </div>
+
+<%- include('partials/footer') %>

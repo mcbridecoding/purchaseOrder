@@ -1,0 +1,67 @@
+<%- include('partials/header') %>
+    <div id="main">
+        <form action="" method="post">
+        <div class="report">
+            <div class="action-bar-right">
+                <img src="/images/DPF_Logo.png" alt="">
+            </div>
+            <% owners.forEach((owner) => { %>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="company" value="<%= owner.company %>">
+                    <label class="form-label" for="company">Company:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="addressOne" value="<%= owner.addressOne %>">
+                    <label class="form-label" for="addressOne">Address 1:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="addressTwo" value="<%= owner.addressTwo %>">
+                    <label class="form-label" for="addressTwo">Address 2:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="city" value="<%= owner.city %>">
+                    <label class="form-label" for="city">City:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="state" value="<%= owner.state %>">
+                    <label class="form-label" for="state">State / Province:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="postal" value="<%= owner.postal %>">
+                    <label class="form-label" for="postal"> Zip / Postal Code:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="country" value="<%= owner.country %>">
+                    <label class="form-label" for="country">Country:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="email" name="email" value="<%= owner.email %>">
+                    <label class="form-label" for="email">Email:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="tel" name="phone" value="<%= owner.phone %>">
+                    <label class="form-label" for="phone">Phone:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="tel" name="fax" value="<%= owner.fax %>">
+                    <label class="form-label" for="fax">Fax:</label>
+                </div>
+            </div>
+            <div class="form-submit">
+                <button name="updateId" value="<%= owner._id %>" class="action-button">Submit</button>
+                <a class="action-button cancel-button" href="/settings">Cancel</a>
+            </div> 
+            <% }) %>
+        </div>
+        </form>
+    </div>
+    <%- include('partials/footer') %>

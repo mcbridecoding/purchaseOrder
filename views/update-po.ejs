@@ -1,0 +1,147 @@
+<%- include('partials/header') %>
+    <% purchaseOrders.forEach((purchaseOrder) => { %>
+    <div id="main">
+        <form action="" method="post" autocomplete="off">
+        <div id="report" class="report">
+            <div class="form-header">
+                <a class="action-button cancel-button" onclick="confirmDelete()">Delete PO</a>
+                <img src="/images/DPF_Logo.png" alt="">
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="poNumber" value="<%= purchaseOrder.poNumber %>" disabled required readonly>
+                    <label class="form-label" for="poNumber">PO#:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="date" name="date" value="<%= purchaseOrder.date %>" required disabled>
+                    <label class="form-label" for="date">Date:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="dpfOrder" value="<%= purchaseOrder.dpfOrder %>" required>
+                    <label class="form-label" for="dpfOrder">DPF Order#:</label>
+                </div>
+                <div class="col form-floating">
+                    <select class="form-select" type="form-select" name="vendor" required disabled>
+                        <option value="<%= purchaseOrder.vendor %>" selected><%= purchaseOrder.vendor %></option>
+                    </select>
+                    <label class="form-label" for="vendor">Vendor:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="company" value="<%= purchaseOrder.company %>" required>
+                    <label class="form-label" for="company">Ship To:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="attention" value="<%= purchaseOrder.attention %>">
+                    <label class="form-label" for="attention">Attention To:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="addressOne" value="<%= purchaseOrder.addressOne %>" required>
+                    <label class="form-label" for="addressOne">Address 1:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="addressTwo" value="<%= purchaseOrder.addressTwo %>">
+                    <label class="form-label" for="addressTwo">Address 2:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="city" value="<%= purchaseOrder.city %>" required>
+                    <label class="form-label" for="city">City:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="state" value="<%= purchaseOrder.state %>" required>
+                    <label class="form-label" for="state">State / Province:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="postal" value="<%= purchaseOrder.postal %>" required>
+                    <label class="form-label" for="postal"> Zip / Postal Code:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="country" value="<%= purchaseOrder.country %>" required>
+                    <label class="form-label" for="country">Country:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="email" name="email" value="<%= purchaseOrder.email %>">
+                    <label class="form-label" for="email">Email:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="tel" name="phone" value="<%= purchaseOrder.phone %>">
+                    <label class="form-label" for="phone">Phone:</label>
+                </div>
+                <div class="col form-floating">
+                    <select class="form-select" type="form-select" name="currency" required>
+                        <% if (purchaseOrder.currency === 'CAD') { %>
+                            <option value="CAD" selected>CAD</option>
+                            <option value="USD">USD</option>
+                        <% } else { %>
+                            <option value="CAD">CAD</option>
+                            <option value="USD" selected>USD</option>
+                        <% } %>        
+                    </select>
+                    <label class="form-label" for="currency">Currency</label>
+                </div>
+            </div>
+            <div class="row vehicle-information">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="vin" value="<%= purchaseOrder.vehicleInformation.vin %>">
+                    <label class="form-label" for="vin">Vin:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="make" value="<%= purchaseOrder.vehicleInformation.make %>">
+                    <label class="form-label" for="make">Make:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="transmission" value="<%= purchaseOrder.vehicleInformation.transmission %>">
+                    <label class="form-label" for="transmission">Transmission:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="transferCase" value="<%= purchaseOrder.vehicleInformation.transferCase %>">
+                    <label class="form-label" for="transferCase">Transfercase:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="tireSize" value="<%= purchaseOrder.vehicleInformation.tireSize %>">
+                    <label class="form-label" for="tireSize">Tire Size:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="fuelTank" value="<%= purchaseOrder.vehicleInformation.fuelTank%>">
+                    <label class="form-label" for="fuelTank">Fuel Tank:</label>
+                </div>
+                <div class="col form-floating">
+                    <textarea class="form-control" name="mods" cols="" rows="30"><%= purchaseOrder.vehicleInformation.mods %></textarea>
+                    <label class="form-label" for="mods">Mods:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="form-label" for="notes">Notes:</label>
+                    <textarea class="form-control" name="notes" cols="" rows="4"><%= purchaseOrder.notes %></textarea>
+                </div>
+            </div>
+            <div class="form-submit">
+                <button name="updateId" value="<%= purchaseOrder._id %>" class="action-button">Submit</button>
+                <a class="action-button cancel-button" href="/purchasing">Cancel</a>
+            </div>  
+        </div>
+        </form>
+        <div id="confirmation-window" class="confirmation-window">   
+            <div class='confirmation-question'>
+                <h2>Do you wish to Delete PO#<%= purchaseOrder.poNumber %>?</h2> 
+            </div>
+            <div class="form-submit">
+                <a class="action-button" href="/delete-po-<%= purchaseOrder._id %>">Delete</a>
+                <a class="action-button cancel-button" onclick="cancelDelete()">Cancel</a>
+            </div>
+        </div>
+    </div>
+    <% }) %> 
+<%- include('partials/footer') %>

@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+    <div id="main">
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="report">
+                <div class="form-header">
+                    <h1>Add Report Data</h1>
+                    <img src="/images/DPF_Logo.png" alt="">
+                </div>
+                <div class="upload">
+                    <label for="fileName" class="form-label">Upload:</label>
+                    <input class="form-control form-control-lg" id="fileName" name="fileName" type="file" required>
+                </div>
+                <div class="form-submit">
+                    <button class="action-button">Submit</button>
+                    <a class="action-button cancel-button" href="#">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+<%- include('partials/footer') %>

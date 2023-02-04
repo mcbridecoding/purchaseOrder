@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+<div id="main">
+    <div class="logo">
+        <img src="/images/DPF_Logo.png" alt="">
+    </div>
+    <div class="report">
+        <table class="table table-striped table-hover table-bordered table-sm">
+            <thead class="table-header">
+                <tr>
+                    <th colspan="5">Open Purchase Orders</th>
+                </tr>
+                <th scope="col">PO #</th>
+                <th scope="col">Date</th>
+                <th scope="col">Vendor</th>
+                <th scope="col">DPF Order#</th>
+                <th scope="col">Ship To</th>
+            </thead>
+            <tbody>
+                <% purchaseOrders.forEach((purchaseOrder) => { %>
+                <tr class="clickable" onclick="window.location='/show-purchase-order-<%= purchaseOrder._id %>'">
+                    <td><%= purchaseOrder.poNumber %></td>
+                    <td><%= purchaseOrder.date %></td>
+                    <td><%= purchaseOrder.vendor %></td>
+                    <td><%= purchaseOrder.dpfOrder %></td>
+                    <td><%= purchaseOrder.company %></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<%- include('partials/footer') %>

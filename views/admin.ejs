@@ -1,0 +1,116 @@
+<%- include('partials/header') %>
+    <div id="main">
+        <div class="report">
+            <div class="admin-header">
+                <h2>Add User</h2>
+            </div>
+            <form action="/add-user" method="post" autocomplete="off">
+                <div class="row">
+                    <div class="col form-floating">
+                        <input class="form-control" type="text" name="username" value="" required>
+                        <label class="form-label" for="username">User Name:</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input class="form-control" type="text" name="password" value="" required>
+                        <label class="form-label" for="password">Password:</label>
+                    </div>
+                </div>
+                <div class="form-submit">
+                    <button name="updateId" value="<%= %>" class="action-button">Submit</button>
+                    <a class="action-button cancel-button" href="/settings">Cancel</a>
+                </div>
+            </form>
+        </div>
+        <div class="report">
+            <div class="admin-header">
+                <h2>Users</h2>
+            </div>
+            <table class="table table-striped table-hover table-bordered table-sm">
+                <thead class="table-header">
+                    <th scope="col" colspan="2">Name</th>
+                </thead>
+                <tbody>
+                    <% users.forEach((user) => { %>
+                    <tr class="align-right"> 
+                        <td class="align-left"><%= user.username%></td>
+                        <td class="table-delete">
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/delete-user-<%= user._id %>">Delete User</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <% if (!hasOwner) { %>
+        <div class="report">
+            <div class="admin-header">
+                <h2>Set up Owner</h2>
+            </div>
+            <form action="/add-owner" method="post" autocomplete="off">
+                <div class="row">
+                    <div class="col form-floating">
+                        <input class="form-control" type="text" name="company" value="">
+                        <label class="form-label" for="company">Company:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col form-floating">
+                        <input class="form-control" type="text" name="addressOne" value="">
+                        <label class="form-label" for="addressOne">Address 1:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col form-floating">
+                        <input class="form-control" type="text" name="addressTwo" value="">
+                        <label class="form-label" for="addressTwo">Address 2:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col form-floating">
+                        <input class="form-control" type="text" name="city" value="">
+                        <label class="form-label" for="city">City:</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input class="form-control" type="text" name="state" value="">
+                        <label class="form-label" for="state">State / Province:</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input class="form-control" type="text" name="postal" value="">
+                        <label class="form-label" for="postal"> Zip / Postal Code:</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input class="form-control" type="text" name="country" value="">
+                        <label class="form-label" for="country">Country:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col form-floating">
+                        <input class="form-control" type="email" name="email" value="">
+                        <label class="form-label" for="email">Email:</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input class="form-control" type="tel" name="phone" value="">
+                        <label class="form-label" for="phone">Phone:</label>
+                    </div>
+                    <div class="col form-floating">
+                        <input class="form-control" type="tel" name="fax" value="">
+                        <label class="form-label" for="fax">Fax:</label>
+                    </div>
+                </div>
+                <div class="form-submit">
+                    <button class="action-button">Save</button>
+                </div> 
+            </div>
+        </form>
+        <% } %>
+    </div>
+<%- include('partials/footer') %>

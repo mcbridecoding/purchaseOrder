@@ -1,0 +1,102 @@
+<%- include('partials/header') %>
+<div id="main">
+    <div class="report">
+        <div class="purchase-order-card-header">
+            <h4>PO#: <%= purchaseOrder.poNumber %></h4>
+            <h4>Date: <%= purchaseOrder.date %></h4>
+            <h4>Vendor: <%= purchaseOrder.vendor %></h4>
+        </div>
+        <div class="order-info">
+            <table class="table">
+                <thead>
+                    <tr class="table-header">
+                        <th scope="col" colspan="4">Order Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">Ship To: <%= purchaseOrder.company %></td>
+                        <td colspan="">Attention: <%= purchaseOrder.attention %></td>
+                        <td colspan="">DPF Order#: <%= purchaseOrder.dpfOrder %></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Address 1: <%= purchaseOrder.addressOne %></td>
+                        <td colspan="2">Address 2: <%= purchaseOrder.addressTwo %></td>
+                    </tr>
+                    <tr>
+                        <td>City: <%= purchaseOrder.city %></td>
+                        <td>State: <%= purchaseOrder.state %></td>
+                        <td>Postal: <%= purchaseOrder.postal %></td>
+                        <td>Country: <%= purchaseOrder.country %></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Email: <%= purchaseOrder.email %></td>
+                        <td>Phone: <%= purchaseOrder.phone %></td>
+                        <td>Fax: <%= purchaseOrder.fax %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="order-info">
+            <table class="table">
+                <thead>
+                    <tr class="table-header">
+                        <th scope="col" colspan="4">Vehicle Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">Vin: <%= purchaseOrder.vehicleInformation.vin %></td>
+                        <td colspan="2">Make: <%= purchaseOrder.vehicleInformation.make %></td>
+                    </tr>
+                    <tr>
+                        <td>Transmission: <%= purchaseOrder.vehicleInformation.transmission %></td>
+                        <td>Transfer Case: <%= purchaseOrder.vehicleInformation.transfercase %></td>
+                        <td>Tire Size: <%= purchaseOrder.vehicleInformation.tireSize %></td>
+                        <td>Fuel Tank: <%= purchaseOrder.vehicleInformation.fuelTank %></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="no-wrap">Mods: <%= purchaseOrder.vehicleInformation.mods %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="order-info">
+            <table class="table table-hover">
+                <thead class="table-header">
+                    <tr>
+                        <th colspan="5">Items Ordered</th>
+                    </tr>
+                    <th scope="col" class="col-sm">Sku</th>
+                    <th scope="col">Description</th>
+                    <th scope="col" class="col-sm align-right">Quantity</th>
+                    <th scope="col" class="col-sm align-right">Unit Price</th>
+                    <th scope="col" class="col-sm align-right">Line Total</th>
+                </thead>
+                <tbody>
+                    <% lineItems.forEach((lineItem) => { %>
+                    <tr class="table-header">
+                    <td><%= lineItem.itemId %></td>
+                    <td class="no-wrap"><%= lineItem.itemDescription %></td>
+                    <td class="align-right"><%= lineItem.orderQuantity %></td>
+                    <td class="align-right"><%= lineItem.unitValue %></td>
+                    <td class="align-right"><%= lineItem.lineTotal %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <div class="order-footer">
+            <div class="notes">
+                <h5>Notes:</h5>
+                <h6><i><%= purchaseOrder.notes %></i></h6>
+            </div>
+            <div class="notes totals">
+                <h5>Sub Total: $<%= subTotal.toFixed(2) %> <%= purchaseOrder.currency %> </h5>
+                <h5>Tax (5%): $<%= (subTotal * 0.05).toFixed(2) %> <%= purchaseOrder.currency %></h5>
+                <h5>Total: $<%= (subTotal * 1.05).toFixed(2) %> <%= purchaseOrder.currency %></h5>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('partials/footer') %>

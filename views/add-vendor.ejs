@@ -1,0 +1,66 @@
+<%- include('partials/header') %>
+    <div id="main">
+        <form action="" method="post" autocomplete="off">
+        <div class="report">
+            <div class="form-header">
+                <h1>Add Vendor</h1>
+                <img src="/images/DPF_Logo.png" alt="">
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="company" value="<%= vendor.company %>" required>
+                    <label class="form-label" for="company">Company:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="addressOne" value="<%= vendor.addressOne %>" required>
+                    <label class="form-label" for="addressOne">Address 1:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="addressTwo" value="<%= vendor.addressTwo %>">
+                    <label class="form-label" for="addressTwo">Address 2:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="city" value="<%= vendor.city %>" required>
+                    <label class="form-label" for="city">City:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="state" value="<%= vendor.state %>" required>
+                    <label class="form-label" for="state">State / Province:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="postal" value="<%= vendor.postal %>" required>
+                    <label class="form-label" for="postal"> Zip / Postal Code:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="country" value="<%= vendor.country %>" required>
+                    <label class="form-label" for="country">Country:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="email" name="email" value="<%= vendor.email %>">
+                    <label class="form-label" for="email">Email:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="tel" name="phone" value="<%= vendor.phone %>">
+                    <label class="form-label" for="phone">Phone:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="tel" name="fax" value="<%= vendor.phone %>">
+                    <label class="form-label" for="fax">Fax:</label>
+                </div>
+            </div>
+            <div class="form-submit">
+                <button name="updateId" value="<%= vendor._id %>" class="action-button">Submit</button>
+                <a class="action-button cancel-button" href="/vendors">Cancel</a>
+            </div>
+        </div>
+        </form>
+    </div>
+<%- include('partials/footer') %>

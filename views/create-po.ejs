@@ -1,0 +1,135 @@
+<%- include('partials/header') %>
+    <div id="main">
+        <form action="/create-po" method="post" autocomplete="off">
+        <div class="report">
+            <div class="form-header">
+                <a class="action-button" href="/dpf-po">Ship to DPF</a>
+                <img src="/images/DPF_Logo.png" alt="">
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control read-only" type="text" name="poNumber" value="<%= newPurchaseOrder %>" readonly>
+                    <label class="form-label" for="poNumber">PO#:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="date" name="date" required>
+                    <label class="form-label" for="date">Date:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="dpfOrder" required>
+                    <label class="form-label" for="dpfOrder">DPF Order#:</label>
+                </div>
+                <div class="col form-floating">
+                    <select class="form-select" type="form-select" name="vendor" required>
+                        <option value=""></option>
+                        <% vendors.forEach((vendor) => { %>
+                        <option value="<%= vendor.company %>"><%= vendor.company %></option>
+                        <% }) %>
+                    </select>
+                    <label class="form-label" for="vendor">Vendor:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="company" value="<%= dpf.company %>" required>
+                    <label class="form-label" for="company">Ship To:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="attention" value="<%= dpf.attention %>">
+                    <label class="form-label" for="attention">Attention To:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="addressOne" value="<%= dpf.addressOne %>" required>
+                    <label class="form-label" for="addressOne">Address 1:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="addressTwo">
+                    <label class="form-label" for="addressTwo">Address 2:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="city" value="<%= dpf.city %>" required>
+                    <label class="form-label" for="city">City:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="state" value="<%= dpf.state %>" required>
+                    <label class="form-label" for="state">State / Province:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="postal" value="<%= dpf.postal %>" required>
+                    <label class="form-label" for="postal"> Zip / Postal Code:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="text" name="country" value="<%= dpf.country %>" required>
+                    <label class="form-label" for="country">Country:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-floating">
+                    <input class="form-control" type="email" name="email" value="<%= dpf.email %>">
+                    <label class="form-label" for="email">Email:</label>
+                </div>
+                <div class="col form-floating">
+                    <input class="form-control" type="tel" name="phone">
+                    <label class="form-label" for="phone">Phone:</label>
+                </div>
+                <div class="col form-floating">
+                    <select class="form-select" type="form-select" name="currency" required>
+                        <option value=""></option>
+                        <option value="CAD">CAD</option>
+                        <option value="USD">USD</option>
+                    </select>
+                    <label class="form-label" for="currency">Currency</label>
+                </div>
+            </div>
+            <div class="row vehicle-information">
+                <div class="col">
+                    <label class="form-label" for="vin">Vin:</label>
+                    <input class="form-control" type="text" name="vin" value="<%= %>" placeholder="Vin ...">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="make">Make:</label>
+                    <input class="form-control" type="text" name="make" value="<%= %>" placeholder="Year / Make / Model ...">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="transmission">Transmission:</label>
+                    <input class="form-control" type="text" name="transmission" value="<%= %>" placeholder="Automatic / Transmission Type ...">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="transferCase">Transfercase:</label>
+                    <input class="form-control" type="text" name="transferCase" value="<%= %>" placeholder="Automatic with Knob or Button / Manual ...">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="form-label" for="tireSize">Tire Size:</label>
+                    <input class="form-control" type="text" name="tireSize" value="<%= %>" placeholder="Tire Size ...">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="fuelTank">Fuel Tank:</label>
+                    <input class="form-control" type="text" name="fuelTank" value="<%= %>" placeholder="Single or Dual ...">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="mods">Mods:</label>
+                    <textarea class="form-control" name="mods" cols="" rows="1"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="form-label" for="notes">Purchase Order Notes:</label>
+                    <textarea class="form-control" name="notes" cols="" rows="4"></textarea>
+                </div>
+            </div>
+            <div class="form-submit">
+                <button class="action-button">Submit</button>
+                <a class="action-button cancel-button" href="/purchasing">Cancel</a>
+            </div>
+        </div>
+        </form>
+    </div>
+<%- include('partials/footer') %>
