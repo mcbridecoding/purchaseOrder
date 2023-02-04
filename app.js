@@ -893,46 +893,50 @@ app.route('/settings')
 
 app.route('/show-orders-:id')
     .get((req, res) => {
-        const searchId = req.params.id;
-        
-        const query = OrderReport.find({ sku: searchId }).sort({ orderNumber: 1 });
-
-        query.exec((err, orders) => {
-            if (!err) {
-                res.render('show-orders', { orders: orders, sku: searchId });
-            } else {
-                console.log(err);
-            }
-        });
+        if (req.isAuthenticated()) {         
+            const searchId = req.params.id;
+            
+            const query = OrderReport.find({ sku: searchId }).sort({ orderNumber: 1 });
+    
+            query.exec((err, orders) => {
+                if (!err) {
+                    res.render('show-orders', { orders: orders, sku: searchId });
+                } else {
+                    console.log(err);
+                }
+            });
+        } else { res.redirect('/login') }
     });
 
 app.route('/show-purchase-order-:id')
     .get((req, res) => {
-        const searchId = req.params.id
-        const subTotals = [0.00];
-        
-        PurchaseOrder.findOne( {_id : searchId }, (purchaseOrderError, purchaseOrder) => {
-            if (!purchaseOrderError) {
-                LineItem.find({ poNumber: searchId }, (lineItemError, lineItems) => {
-                    if (!lineItemError) {
-                        lineItems.forEach((item) => {
-                            subTotals.push(Number(item.orderQuantity) * Number(item.unitValue));
-                        });
-                        const subTotal = calculateSubTotal(subTotals);
-                        res.render('show-purchase-order', {
-                            purchaseOrder: purchaseOrder,
-                            lineItems: lineItems,
-                            subTotal: subTotal
-                        });
-                    } else {
-                        console.log(`Line Item Error: ${lineItemError}`)
-                    }
-                });
-            } else {
-                console.log(`Purchase Order Error: ${purchaseOrderError}`);
-            }
-        });
-    })
+        if (req.isAuthenticated()) {
+            const searchId = req.params.id
+            const subTotals = [0.00];
+            
+            PurchaseOrder.findOne( {_id : searchId }, (purchaseOrderError, purchaseOrder) => {
+                if (!purchaseOrderError) {
+                    LineItem.find({ poNumber: searchId }, (lineItemError, lineItems) => {
+                        if (!lineItemError) {
+                            lineItems.forEach((item) => {
+                                subTotals.push(Number(item.orderQuantity) * Number(item.unitValue));
+                            });
+                            const subTotal = calculateSubTotal(subTotals);
+                            res.render('show-purchase-order', {
+                                purchaseOrder: purchaseOrder,
+                                lineItems: lineItems,
+                                subTotal: subTotal
+                            });
+                        } else {
+                            console.log(`Line Item Error: ${lineItemError}`)
+                        }
+                    });
+                } else {
+                    console.log(`Purchase Order Error: ${purchaseOrderError}`);
+                }
+            });
+        } else { res.redirect('/login') }
+    });
 
 app.route('/update-owner-id=:id')
     .get((req, res) => {
